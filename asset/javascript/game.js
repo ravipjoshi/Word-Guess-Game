@@ -1,4 +1,4 @@
-var WordsArray = ["maddona","jhon","rocky","wapper","james","oswal","sheggi","horton","emanual"];
+var WordsArray = ["madon","jhon","rocky","waper","james","oswal","shegi","hortin","emnual"];
     var wins = document.getElementById("wins");
     var word= document.getElementById("Word");
     var guess= document.getElementById("NumberofGuesses");
@@ -10,6 +10,7 @@ var WordsArray = ["maddona","jhon","rocky","wapper","james","oswal","sheggi","ho
     var gsleft= WordsArray.length;
     let temparray1=[];
     let temparray2=[];
+    let temparray3=[];
     var wordguess;
     var tempword;
     var updatediv
@@ -31,31 +32,54 @@ var WordsArray = ["maddona","jhon","rocky","wapper","james","oswal","sheggi","ho
     {
        // debugger;
        temparray1[i] = wordguess.charAt(i);
+        
        
        div[i] = document.createElement("div");
        div[i].innerText="__"+" ";
        div[i].setAttribute("id","div"+i);
        word.appendChild(div[i]);
 
+       
      
-    } 
+     
+    }
+    debugger;
+    console.log("guess letter randomly :"+wordguess);
+  
+   
+/*
+  
+    for(var i=0; i<temparray1.length;i++)
+    {
+      for(var j=0; j<temparray1.length;j++)
+      {
+          if(temparray1[j]=== temparray1[i])
+          {
+            temparray3.push(i);
+          }
+      }
+    }
+     console.log(temparray3); 
+*/
    }
+
    function resetpage()
    {
-    wordguess = WordsArray[Math.floor(Math.random() * WordsArray.length)];
+   
+    
+     
 
     for(var i=0;i<=wordguess.length-1;i++)
     {
-       // debugger;
-       temparray1[i] = wordguess.charAt(i);
-       
-       div[i] = document.getElementById("div"+[i]);
-       div[i].innerText="__"+" ";
-      // div[i].setAttribute("id","div"+i);
-       word.appendChild(div[i]);
 
+         // debugger;
+       document.getElementById("div"+i).remove();
+        
      
-    } 
+    }
+    wordguess = WordsArray[Math.floor(Math.random() * WordsArray.length)];
+    setpage();
+
    }
 
    function checkword()
@@ -103,7 +127,8 @@ var WordsArray = ["maddona","jhon","rocky","wapper","james","oswal","sheggi","ho
           var tempar2 = temparray2.join("");
           if(tempar2==wordguess)
           {
-            setpage();
+            //setpage();
+            resetpage();
           }
           
 
