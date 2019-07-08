@@ -1,4 +1,4 @@
-var WordsArray = ["Maddona","Jhon","Rocky","Wapper","James","Oswal","Sheggi","Horton","Emanual"];
+var WordsArray = ["maddona","jhon","rocky","wapper","james","oswal","sheggi","horton","emanual"];
     var wins = document.getElementById("wins");
     var word= document.getElementById("Word");
     var guess= document.getElementById("NumberofGuesses");
@@ -12,6 +12,7 @@ var WordsArray = ["Maddona","Jhon","Rocky","Wapper","James","Oswal","Sheggi","Ho
     let temparray2=[];
     var wordguess;
     var tempword;
+    var updatediv
     wins.innerText =wincnt;
     word.innerText =" ";
     guessleft.innerHTML=gsleft;
@@ -26,14 +27,32 @@ var WordsArray = ["Maddona","Jhon","Rocky","Wapper","James","Oswal","Sheggi","Ho
     
    function setpage()
    {
-    for(var i=0;i<=wordguess.length;i++)
+    for(var i=0;i<=wordguess.length-1;i++)
     {
        // debugger;
        temparray1[i] = wordguess.charAt(i);
        
-       div[i] = document.createElement("div"+i);
+       div[i] = document.createElement("div");
        div[i].innerText="__"+" ";
-       word.append(div[i]);
+       div[i].setAttribute("id","div"+i);
+       word.appendChild(div[i]);
+
+     
+    } 
+   }
+   function resetpage()
+   {
+    wordguess = WordsArray[Math.floor(Math.random() * WordsArray.length)];
+
+    for(var i=0;i<=wordguess.length-1;i++)
+    {
+       // debugger;
+       temparray1[i] = wordguess.charAt(i);
+       
+       div[i] = document.getElementById("div"+[i]);
+       div[i].innerText="__"+" ";
+      // div[i].setAttribute("id","div"+i);
+       word.appendChild(div[i]);
 
      
     } 
@@ -54,25 +73,56 @@ var WordsArray = ["Maddona","Jhon","Rocky","Wapper","James","Oswal","Sheggi","Ho
            var userguess = event.key;
 
                
-         debugger;               
+         debugger;       
+         
+         temparray1.forEach (function(element){
+           if(element==userguess)
+           {
+             var index=temparray1.indexOf(element);
+             console.log(index);
+             var tempdiv="div"+index;
+             console.log(tempdiv);
+              updatediv = document.getElementById(tempdiv);
+
+
+             console.log(updatediv);
+             updatediv.innerText=userguess;
+             temparray2[index] = userguess;
+             temp3 =true;
+             //div.innerText=userguess;
+             //wincnt++;
+             // wins.innerText=wincnt;
+             //letterguess = guessletter();
+           }
+          
+         });
+         if(temp3)
+         {
+          gsleft--;
+          guessleft.innerText=gsleft;
+          var tempar2 = temparray2.join("");
+          if(tempar2==wordguess)
+          {
+            setpage();
+          }
+          
+
+         }
+         else{
+         if(gsleft==0)
+         {
+           gsleft=WordsArray.length;
+           guessleft.innerText=gsleft;  
+         }
+        else{         
+         gsleft--;
+         guessleft.innerText=gsleft; 
+         guessletter.append(userguess+",");
+         
+        }
            
-          var j=0;
-          while(userguess!==temparray1[j])
-            {
-                
-                
-                
-                guessletter.append(userguess);
-                j++;
-                
-                
-            }
-            div[j].innerText=userguess;
-            temparray2[j]=userguess;
-
-            temp3 = temp3+temparray2[j]; 
-
-           // temparray2 = 
+      }
+         
 
 
      
@@ -82,26 +132,7 @@ var WordsArray = ["Maddona","Jhon","Rocky","Wapper","James","Oswal","Sheggi","Ho
            
            
           
-           if(letterguess==userguess){
-              wincnt++;
-              wins.innerText=wincnt;
-             letterguess = guessletter();
-             // guess.append(userguess+",");
-              // var letterguess=letters.indexOf[Math.floor(Math.random() * letters.length)];
-               //console.log(letterguess); 
-           }
-           else{
-                 
-                 gsleft--;
-                 guess.append(userguess+",");
-                 guessleft.innerText=gsleft; 
-                  if(gsleft<=0)
-                  {
-                    loscnt++;
-                    losses.innerText=loscnt;
-                    gsleft= letters.length;
-                  }
-           }
+    
           }
     
 
